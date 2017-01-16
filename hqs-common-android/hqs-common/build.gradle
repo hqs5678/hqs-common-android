@@ -70,19 +70,7 @@ install {
         }
     }
 }
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-//task javadoc(type: Javadoc){
-//options.encoding = 'UTF-8'
-//source = android.sourceSets.main.java.srcDirs
-// classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//}
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
+
 
 Properties properties = new Properties()//读取properties的配置信息，当然直接把信息写到代码里也是可以的
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -106,6 +94,11 @@ bintray {
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
