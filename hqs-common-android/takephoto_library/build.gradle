@@ -25,4 +25,3 @@ dependencies {
     compile 'com.soundcloud.android.crop:lib_crop:1.0.0'
     compile project(':multipleimageselect')
 }
-//apply from: "bintrayUpload.gradle"

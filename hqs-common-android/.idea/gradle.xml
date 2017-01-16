@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/hqs" />
+            <option value="$PROJECT_DIR$/hqs-common" />
             <option value="$PROJECT_DIR$/multipleimageselect" />
             <option value="$PROJECT_DIR$/takephoto_library" />
           </set>
