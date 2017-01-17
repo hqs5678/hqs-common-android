@@ -18,6 +18,14 @@ import java.lang.reflect.Method;
 
 public class StatusBarUtil {
 
+    public static void hideStatusBar(Activity activity){
+        // 隐藏标题栏
+        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 隐藏状态栏
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
     /**
      * 修改状态栏为全透明
      *

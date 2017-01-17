@@ -292,9 +292,6 @@ public class TabBarView extends RelativeLayout{
             this.addView(titleView);
             this.addView(badgeView);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                titleView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-            }
             titleView.setTextSize(titleSize);
             badgeView.setBackgroundColor(Color.RED);
         }
@@ -358,7 +355,7 @@ public class TabBarView extends RelativeLayout{
             int titleH = params.height - imgW - margin;
             LayoutParams pTitle = new LayoutParams(params.width,titleH);
             pTitle.addRule(ALIGN_PARENT_BOTTOM, TRUE);
-            pTitle.addRule(TEXT_ALIGNMENT_CENTER);
+            pTitle.addRule(CENTER_HORIZONTAL, TRUE);
             pTitle.topMargin = margin;
             titleView.setLayoutParams(pTitle);
 
