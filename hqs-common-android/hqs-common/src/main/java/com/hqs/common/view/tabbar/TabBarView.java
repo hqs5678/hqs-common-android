@@ -353,7 +353,7 @@ public class TabBarView extends RelativeLayout{
 
             // titleView
             int titleH = params.height - imgW - margin;
-            LayoutParams pTitle = new LayoutParams(params.width,titleH);
+            LayoutParams pTitle = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,titleH);
             pTitle.addRule(ALIGN_PARENT_BOTTOM, TRUE);
             pTitle.addRule(CENTER_HORIZONTAL, TRUE);
             pTitle.topMargin = margin;
