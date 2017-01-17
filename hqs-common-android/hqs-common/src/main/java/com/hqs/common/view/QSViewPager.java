@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 public class QSViewPager extends ViewPager {
 
-    private boolean horizontalScrollEnabel = false;
+    private boolean horizontalScrollEnable = false;
 
     public QSViewPager(Context context) {
         super(context);
@@ -23,7 +23,7 @@ public class QSViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if(horizontalScrollEnabel){
+        if(horizontalScrollEnable){
             return super.onTouchEvent(ev);
         }
         else {
@@ -34,7 +34,7 @@ public class QSViewPager extends ViewPager {
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
-        if(horizontalScrollEnabel){
+        if(horizontalScrollEnable){
             return super.onInterceptTouchEvent(ev);
         }
         else {
@@ -42,12 +42,12 @@ public class QSViewPager extends ViewPager {
         }
     }
 
-    public boolean isHorizontalScrollEnabel() {
-        return horizontalScrollEnabel;
+    public boolean isHorizontalScrollEnable() {
+        return horizontalScrollEnable;
     }
 
-    public void setHorizontalScrollEnabel(boolean horizontalScrollEnabel) {
-        this.horizontalScrollEnabel = horizontalScrollEnabel;
+    public void setHorizontalScrollEnable(boolean horizontalScrollEnabel) {
+        this.horizontalScrollEnable = horizontalScrollEnabel;
     }
 
 
