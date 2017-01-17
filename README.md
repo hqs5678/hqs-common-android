@@ -3,7 +3,7 @@ hqs-common for android
 
 
 
-#### android studio depency
+#### android studio dependency
 
 添加依赖
 
