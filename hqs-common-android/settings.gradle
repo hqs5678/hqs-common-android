@@ -1,1 +1,1 @@
-include ':app', ':multipleimageselect', ':hqs-common', ':takephoto_library'
+include ':app', ':hqs-common'

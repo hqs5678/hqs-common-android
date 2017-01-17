@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hqs.R;
-import com.hqs.common.utils.ViewUtil;
 
 /**
  * Created by apple on 2016/10/27.

@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hqs-common/hqs-common.iml" filepath="$PROJECT_DIR$/hqs-common/hqs-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/hqs-common-android.iml" filepath="$PROJECT_DIR$/hqs-common-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multipleimageselect/multipleimageselect.iml" filepath="$PROJECT_DIR$/multipleimageselect/multipleimageselect.iml" />
-      <module fileurl="file://$PROJECT_DIR$/takephoto_library/takephoto_library.iml" filepath="$PROJECT_DIR$/takephoto_library/takephoto_library.iml" />
     </modules>
   </component>
 </project>

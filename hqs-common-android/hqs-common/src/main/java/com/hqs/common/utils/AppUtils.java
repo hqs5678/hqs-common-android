@@ -61,7 +61,7 @@ public class AppUtils {
         try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
             installed = true;
-        } catch (PackageManager.NameNotFoundException e) {
+        } catch (NameNotFoundException e) {
             installed = false;
         }
         return installed;

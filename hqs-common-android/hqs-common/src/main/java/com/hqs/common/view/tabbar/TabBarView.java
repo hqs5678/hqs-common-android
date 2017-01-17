@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hqs.common.utils.ViewUtil;
-
 import java.util.ArrayList;
 
 /**

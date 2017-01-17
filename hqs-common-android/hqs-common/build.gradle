@@ -29,7 +29,6 @@ dependencies {
     compile 'com.android.support:design:+'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile project(':takephoto_library')
 }
 
 

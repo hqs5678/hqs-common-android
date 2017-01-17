@@ -13,18 +13,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * Created by apple on 2016/12/16.
+ * Created by apple on 16/9/26.
  */
 
 public class StatusBarUtil {
-
-    public static void hideStatusBar(Activity activity){
-        // 隐藏标题栏
-        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // 隐藏状态栏
-        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
 
     /**
      * 修改状态栏为全透明
@@ -192,3 +184,5 @@ public class StatusBarUtil {
     }
 
 }
+
+
