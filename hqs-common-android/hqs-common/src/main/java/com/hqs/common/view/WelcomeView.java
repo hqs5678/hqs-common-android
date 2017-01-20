@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.hqs.R;
+import com.hqs.common.R;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.hqs.R;
+import com.hqs.common.R;
 
 /**
  * Created by apple on 2016/10/12.

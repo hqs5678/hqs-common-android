@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hqs.R;
+import com.hqs.common.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

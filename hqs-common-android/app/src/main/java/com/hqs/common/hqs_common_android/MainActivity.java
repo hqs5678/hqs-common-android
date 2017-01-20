@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
+                        break;
+
 
 
                     case 2:

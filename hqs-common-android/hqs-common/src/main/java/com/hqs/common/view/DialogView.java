@@ -1,26 +1,27 @@
 package com.hqs.common.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hqs.R;
+import com.hqs.common.R;
 import com.hqs.common.utils.ViewUtil;
 
 /**
  * Created by apple on 2016/10/27.
  */
 
-public class DialogView extends RelativeLayout {
+public class DialogView {
 
     private Context context;
     private RelativeLayout contentView;
@@ -34,7 +35,6 @@ public class DialogView extends RelativeLayout {
     private TextView tvDivider1;
 
     public DialogView(Context context) {
-        super(context);
         this.context = context;
         setup();
     }
@@ -43,7 +43,7 @@ public class DialogView extends RelativeLayout {
     private void setup(){
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Light_Dialog);
+            builder = new AlertDialog.Builder(context, R.style.CustomDialogStyle);
         }
         else{
             builder = new AlertDialog.Builder(context);
@@ -96,8 +96,8 @@ public class DialogView extends RelativeLayout {
         leftButton.setVisibility(View.GONE);
         tvDivider1.setVisibility(View.GONE);
 
-        LayoutParams layoutParams = (LayoutParams) rightButton.getLayoutParams();
-        layoutParams.addRule(ALIGN_PARENT_LEFT, TRUE);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) rightButton.getLayoutParams();
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
         rightButton.setLayoutParams(layoutParams);
     }
 
@@ -121,11 +121,11 @@ public class DialogView extends RelativeLayout {
     }
 
     public void setDividerHeight(int h){
-        RelativeLayout.LayoutParams params = (LayoutParams) tvDivider0.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tvDivider0.getLayoutParams();
         params.height = h;
         tvDivider0.setLayoutParams(params);
 
-        params = (LayoutParams) tvDivider1.getLayoutParams();
+        params = (RelativeLayout.LayoutParams) tvDivider1.getLayoutParams();
         params.width = h;
         tvDivider1.setLayoutParams(params);
     }
@@ -142,6 +142,24 @@ public class DialogView extends RelativeLayout {
     public void setCancelable(boolean cancelable) {
         if (dialog != null) {
             dialog.setCancelable(cancelable);
+        }
+    }
+
+    public class DialogActivity extends Activity {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            RelativeLayout relativeLayout = new RelativeLayout(this);
+            this.setContentView(relativeLayout);
+
+            relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    finish();
+                }
+            });
         }
     }
 }
