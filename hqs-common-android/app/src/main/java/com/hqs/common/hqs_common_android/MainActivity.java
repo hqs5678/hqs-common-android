@@ -1,7 +1,6 @@
 package com.hqs.common.hqs_common_android;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hqs.common.utils.DensityUtils;
-import com.hqs.common.utils.ScreenUtils;
-import com.hqs.common.view.DialogView;
+import com.hqs.common.view.QDialog;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import static android.view.View.TEXT_ALIGNMENT_CENTER;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
 
-                        DialogView dialogView = new DialogView(MainActivity.this);
+                        QDialog dialogView = new QDialog(MainActivity.this);
                         dialogView.setSingleButtonMode();
                         dialogView.rightButton.setText("OK");
                         dialogView.rightButton.setTextColor(Color.BLUE);
                         dialogView.setCancelable(true);
-                        dialogView.show("hello this is message!!!!", new DialogView.OnDialogClickListener() {
+                        dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
                             @Override
                             public void onClickRightButton() {
                                 makeToast("ok");
@@ -107,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClickLeftButton() {
                                 makeToast("cancel");
+                            }
+
+                            @Override
+                            public void onCancel() {
+
                             }
                         });
 
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case 1:
-                        dialogView = new DialogView(MainActivity.this);
+                        dialogView = new QDialog(MainActivity.this);
 
                         dialogView.rightButton.setText("OK");
                         dialogView.leftButton.setText("Cancel");
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                         dialogView.rightButton.setTextColor(Color.BLUE);
 
                         dialogView.setCancelable(true);
-                        dialogView.show("hello this is message!!!!", new DialogView.OnDialogClickListener() {
+                        dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
                             @Override
                             public void onClickRightButton() {
                                 makeToast("ok");
@@ -134,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
                             public void onClickLeftButton() {
                                 makeToast("cancel");
                             }
+
+                            @Override
+                            public void onCancel() {
+
+                            }
                         });
 
                         break;
@@ -141,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case 2:
-                        dialogView = new DialogView(MainActivity.this);
+                        dialogView = new QDialog(MainActivity.this);
 
                         dialogView.rightButton.setText("OK");
                         dialogView.leftButton.setText("Cancel");
@@ -153,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                         dialogView.setDividerHeight(4);
 
                         dialogView.setCancelable(true);
-                        dialogView.show("hello this is message!!!!", new DialogView.OnDialogClickListener() {
+                        dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
                             @Override
                             public void onClickRightButton() {
                                 makeToast("ok");
@@ -162,6 +167,11 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClickLeftButton() {
                                 makeToast("cancel");
+                            }
+
+                            @Override
+                            public void onCancel() {
+
                             }
                         });
 

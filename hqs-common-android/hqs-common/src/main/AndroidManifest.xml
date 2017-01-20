@@ -7,7 +7,7 @@
 
     <application android:allowBackup="true" >
 
-        <activity android:name=".view.DialogView$DialogActivity" android:theme="@style/CustomDialogStyle" />
+        <activity android:name=".view.QDialog$DialogActivity" android:theme="@style/CustomDialogStyle" />
 
     </application>
 
