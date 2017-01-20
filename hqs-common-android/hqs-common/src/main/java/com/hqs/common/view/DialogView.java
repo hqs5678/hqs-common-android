@@ -3,6 +3,7 @@ package com.hqs.common.view;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -23,8 +24,8 @@ public class DialogView extends RelativeLayout {
     private Context context;
     private RelativeLayout contentView;
     private OnDialogClickListener dialogClickListener;
-    private Dialog dialog;
 
+    public Dialog dialog;
     public Button leftButton;
     public Button rightButton;
     public TextView tvMessage;
@@ -64,7 +65,7 @@ public class DialogView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (dialogClickListener != null){
-                    dialogClickListener.onClickCancelButton();
+                    dialogClickListener.onClickLeftButton();
                 }
                 dialog.dismiss();
             }
@@ -73,9 +74,17 @@ public class DialogView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (dialogClickListener != null){
-                    dialogClickListener.onClickOKButton();
+                    dialogClickListener.onClickRightButton();
                 }
                 dialog.dismiss();
+            }
+        });
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                if (dialogClickListener != null){
+                    dialogClickListener.onClickLeftButton();
+                }
             }
         });
     }
@@ -104,8 +113,18 @@ public class DialogView extends RelativeLayout {
         }
     }
 
+    public OnDialogClickListener getOnDialogClickListener() {
+        return dialogClickListener;
+    }
+
     public interface OnDialogClickListener{
-        void onClickOKButton();
-        void onClickCancelButton();
+        void onClickRightButton();
+        void onClickLeftButton();
+    }
+
+    public void setCancelable(boolean cancelable) {
+        if (dialog != null) {
+            dialog.setCancelable(cancelable);
+        }
     }
 }
