@@ -90,9 +90,18 @@ public class DialogView extends RelativeLayout {
     }
 
     public void show(String message, OnDialogClickListener onDialogClickListener){
-        tvMessage.setText(message);
-        dialogClickListener = onDialogClickListener;
-        dialog.show();
+        if(dialog != null){
+            tvMessage.setText(message);
+            dialogClickListener = onDialogClickListener;
+            dialog.show();
+        }
+    }
+
+    public void dismiss(){
+        if (dialog != null){
+            dialog.dismiss();
+            dialog = null;
+        }
     }
 
     public interface OnDialogClickListener{
