@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,7 +30,8 @@ public class DialogView extends RelativeLayout {
     public Button leftButton;
     public Button rightButton;
     public TextView tvMessage;
-    private TextView tvDivider;
+    private TextView tvDivider0;
+    private TextView tvDivider1;
 
     public DialogView(Context context) {
         super(context);
@@ -55,7 +57,8 @@ public class DialogView extends RelativeLayout {
         leftButton = (Button) contentView.findViewById(R.id.btn_left);
         rightButton = (Button) contentView.findViewById(R.id.btn_right);
         tvMessage = (TextView) contentView.findViewById(R.id.tv_message);
-        tvDivider = (TextView) contentView.findViewById(R.id.tv_divider1);
+        tvDivider1 = (TextView) contentView.findViewById(R.id.tv_divider1);
+        tvDivider0 = (TextView) contentView.findViewById(R.id.tv_divider);
 
         ViewUtil.setRoundCornerToView(leftButton, 0, Color.GRAY, Color.WHITE);
         ViewUtil.setRoundCornerToView(rightButton, 0, Color.GRAY, Color.WHITE);
@@ -91,7 +94,7 @@ public class DialogView extends RelativeLayout {
 
     public void setSingleButtonMode(){
         leftButton.setVisibility(View.GONE);
-        tvDivider.setVisibility(View.GONE);
+        tvDivider1.setVisibility(View.GONE);
 
         LayoutParams layoutParams = (LayoutParams) rightButton.getLayoutParams();
         layoutParams.addRule(ALIGN_PARENT_LEFT, TRUE);
@@ -115,6 +118,20 @@ public class DialogView extends RelativeLayout {
 
     public OnDialogClickListener getOnDialogClickListener() {
         return dialogClickListener;
+    }
+
+    public void setDividerHeight(int h){
+        RelativeLayout.LayoutParams params = (LayoutParams) tvDivider0.getLayoutParams();
+        params.height = h;
+        tvDivider0.setLayoutParams(params);
+
+        params = (LayoutParams) tvDivider1.getLayoutParams();
+        params.width = h;
+        tvDivider1.setLayoutParams(params);
+    }
+    public void setDividerColor(int color){
+        tvDivider0.setBackgroundColor(color);
+        tvDivider1.setBackgroundColor(color);
     }
 
     public interface OnDialogClickListener{

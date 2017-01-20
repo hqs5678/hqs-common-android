@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
 
+
+
                     case 1:
                         dialogView = new DialogView(MainActivity.this);
 
@@ -120,6 +122,33 @@ public class MainActivity extends AppCompatActivity {
 
                         dialogView.leftButton.setTextColor(Color.RED);
                         dialogView.rightButton.setTextColor(Color.BLUE);
+
+                        dialogView.setCancelable(true);
+                        dialogView.show("hello this is message!!!!", new DialogView.OnDialogClickListener() {
+                            @Override
+                            public void onClickRightButton() {
+                                makeToast("ok");
+                            }
+
+                            @Override
+                            public void onClickLeftButton() {
+                                makeToast("cancel");
+                            }
+                        });
+
+
+
+                    case 2:
+                        dialogView = new DialogView(MainActivity.this);
+
+                        dialogView.rightButton.setText("OK");
+                        dialogView.leftButton.setText("Cancel");
+
+                        dialogView.leftButton.setTextColor(Color.RED);
+                        dialogView.rightButton.setTextColor(Color.BLUE);
+                        dialogView.tvMessage.setTextColor(Color.RED);
+                        dialogView.setDividerColor(Color.BLUE);
+                        dialogView.setDividerHeight(4);
 
                         dialogView.setCancelable(true);
                         dialogView.show("hello this is message!!!!", new DialogView.OnDialogClickListener() {
