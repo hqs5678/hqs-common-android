@@ -82,6 +82,14 @@ public class QDialog {
         activity.overridePendingTransition(0, 0);
     }
 
+    public Button getLeftButton(){
+        return leftButton;
+    }
+
+    public Button getRightButton(){
+        return rightButton;
+    }
+
     public void dismiss() {
         if (dialogActivity != null){
             DialogActivity activity = (DialogActivity) dialogActivity.get();
