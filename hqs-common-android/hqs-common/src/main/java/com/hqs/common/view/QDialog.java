@@ -28,8 +28,8 @@ public class QDialog {
     private static RelativeLayout contentView;
     private static OnDialogClickListener dialogClickListener;
 
-    private static int enterAnim = R.anim.dialog_in;
-    private static int exitAnim = R.anim.dialog_out;
+    private static int enterAnim = R.anim.dialog_in_qs;
+    private static int exitAnim = R.anim.dialog_out_qs;
 
     private static Button leftButton;
     private static Button rightButton;
