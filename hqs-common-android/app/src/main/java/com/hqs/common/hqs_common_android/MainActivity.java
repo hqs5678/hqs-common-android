@@ -1,5 +1,6 @@
 package com.hqs.common.hqs_common_android;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         titles.add("dialog1 onclick listener");
         titles.add("dialog2 cancel ok");
         titles.add("dialog3 auto cancel");
+        titles.add("4 view utils get view position");
 
 
         ListView lv = (ListView) findViewById(R.id.lv);
@@ -220,6 +222,14 @@ public class MainActivity extends AppCompatActivity {
 //                                dialogView.dismiss();
 //                            }
 //                        }, 1000);
+
+                        break;
+
+
+                    case 4:
+
+                        Intent intent = new Intent(MainActivity.this, TestViewUtilActivity.class);
+                        startActivity(intent);
 
                         break;
 
