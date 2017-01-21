@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         final ArrayList<String> titles = new ArrayList<String>();
 
         titles.add("dialog0");
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 RelativeLayout relativeLayout;
                 TextView tv;
-                if (convertView == null && convertView instanceof RelativeLayout == false){
+                if (convertView == null && convertView instanceof RelativeLayout == false) {
                     relativeLayout = new RelativeLayout(MainActivity.this);
                     tv = new TextView(MainActivity.this);
 
@@ -75,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     tv.setLayoutParams(layoutParams);
 
                     relativeLayout.addView(tv);
-                }
-                else{
+                } else {
                     relativeLayout = (RelativeLayout) convertView;
                     tv = (TextView) relativeLayout.getChildAt(0);
                 }
@@ -119,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
 
-
                     case 1:
                         dialogView = new QDialog(MainActivity.this);
 
@@ -146,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
                         });
 
                         break;
-
 
 
                     case 2:
@@ -214,10 +209,9 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 dialogView.dismiss();
                             }
-                        }, 2000);
+                        }, 1000);
 
                         break;
-
 
 
                     default:
@@ -226,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void makeToast(String message){
+    public void makeToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

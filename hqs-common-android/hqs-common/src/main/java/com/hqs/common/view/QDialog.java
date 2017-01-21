@@ -38,7 +38,7 @@ public class QDialog {
     private TextView tvDivider1;
     private static int margin = 40;
 
-    private static boolean cancelable;
+    private static boolean cancelable = false;
     private static int backgroundRes = -1;
     private static WeakReference<Activity> dialogActivity;
 
@@ -159,12 +159,16 @@ public class QDialog {
         return this;
     }
 
-
-
-    public class Builder {
-
-
+    public static void destroy(){
+        QDialog.backgroundRes = -1;
+        QDialog.contentView = null;
+        QDialog.cancelable = false;
+        QDialog.dialogActivity = null;
+        QDialog.leftButton = null;
+        QDialog.rightButton = null;
+        QDialog.dialogClickListener = null;
     }
+
 
     public static class DialogActivity extends Activity {
 
@@ -255,6 +259,11 @@ public class QDialog {
 
         }
 
+        @Override
+        protected void onDestroy() {
+            QDialog.destroy();
+            super.onDestroy();
+        }
 
         @Override
         public void finish() {
