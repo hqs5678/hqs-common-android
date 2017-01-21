@@ -1,13 +1,14 @@
 package com.hqs.common.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,28 +24,32 @@ import java.lang.ref.WeakReference;
 
 public class QDialog {
 
-    private Context context;
-    private RelativeLayout contentView;
-    private OnDialogClickListener dialogClickListener;
+    private Activity activity;
+    private static RelativeLayout contentView;
+    private static OnDialogClickListener dialogClickListener;
 
-    public Button leftButton;
-    public Button rightButton;
+    private static int enterAnim = R.anim.dialog_in;
+    private static int exitAnim = R.anim.dialog_out;
+
+    public static Button leftButton;
+    public static Button rightButton;
     public TextView tvMessage;
     private TextView tvDivider0;
     private TextView tvDivider1;
+    private static int margin = 40;
 
-    private boolean cancelable;
-    private WeakReference<Activity> dialogActivity;
+    private static boolean cancelable;
+    private static WeakReference<Activity> dialogActivity;
 
-    public QDialog(Context context) {
-        this.context = context;
+    public QDialog(Activity activity) {
+        this.activity = activity;
         setup();
     }
 
 
     private void setup() {
 
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         contentView = (RelativeLayout) inflater.inflate(R.layout.dialog_cancelable, null);
 
         leftButton = (Button) contentView.findViewById(R.id.btn_left);
@@ -72,15 +77,16 @@ public class QDialog {
         tvMessage.setText(message);
         dialogClickListener = onDialogClickListener;
 
-        Intent intent = new Intent(context, DialogActivity.class);
-        context.startActivity(intent);
+        Intent intent = new Intent(activity, DialogActivity.class);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(0, 0);
     }
 
     public void dismiss() {
         if (dialogActivity != null){
-            Activity activity = dialogActivity.get();
+            DialogActivity activity = (DialogActivity) dialogActivity.get();
             if (activity != null){
-                activity.finish();
+                activity.onFinish();
                 if (dialogClickListener != null) {
                     dialogClickListener.onCancel();
                 }
@@ -103,6 +109,11 @@ public class QDialog {
         tvDivider1.setLayoutParams(params);
     }
 
+    public void setAnimation(int enterAnim, int exitAnim){
+        QDialog.enterAnim = enterAnim;
+        QDialog.exitAnim = exitAnim;
+    }
+
     public void setDividerColor(int color) {
         tvDivider0.setBackgroundColor(color);
         tvDivider1.setBackgroundColor(color);
@@ -118,17 +129,18 @@ public class QDialog {
         this.cancelable = cancelable;
     }
 
-    public class DialogActivity extends Activity {
+    public static class DialogActivity extends Activity {
 
-
+        private RelativeLayout relativeLayout;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
             dialogActivity = new WeakReference<Activity>(this);
 
-            RelativeLayout relativeLayout = new RelativeLayout(this);
+            relativeLayout = new RelativeLayout(this);
             this.setContentView(relativeLayout);
+            relativeLayout.setBackgroundResource(R.color.dialogBackgroundColor);
 
             relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,7 +149,7 @@ public class QDialog {
                         if (dialogClickListener != null) {
                             dialogClickListener.onCancel();
                         }
-                        finish();
+                        onFinish();
                     }
                 }
             });
@@ -146,7 +158,13 @@ public class QDialog {
 
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+            layoutParams.leftMargin = margin;
+            layoutParams.rightMargin = margin;
             contentView.setLayoutParams(layoutParams);
+
+            Animation animation = AnimationUtils.loadAnimation(this, enterAnim);
+            relativeLayout.setAnimation(animation);
+            animation.start();
 
 
             leftButton.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +173,7 @@ public class QDialog {
                     if (dialogClickListener != null) {
                         dialogClickListener.onClickLeftButton();
                     }
-                    finish();
+                    onFinish();
                 }
             });
             rightButton.setOnClickListener(new View.OnClickListener() {
@@ -164,9 +182,41 @@ public class QDialog {
                     if (dialogClickListener != null) {
                         dialogClickListener.onClickRightButton();
                     }
-                    finish();
+                    onFinish();
                 }
             });
+        }
+
+        private void onFinish(){
+            relativeLayout.clearAnimation();
+            Animation animation = AnimationUtils.loadAnimation(this, exitAnim);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    finish();
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            relativeLayout.setAnimation(animation);
+            animation.start();
+
+        }
+
+
+        @Override
+        public void finish() {
+            super.finish();
+            overridePendingTransition(0, 0);
         }
     }
 }
