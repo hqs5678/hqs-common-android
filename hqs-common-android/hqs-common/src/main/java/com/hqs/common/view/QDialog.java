@@ -170,9 +170,9 @@ public class QDialog {
     }
 
     public void release(){
+        this.activity = null;
         this.tvMessage = null;
         this.tvDivider1 = null;
-        this.activity = null;
         this.tvDivider0 = null;
     }
 
