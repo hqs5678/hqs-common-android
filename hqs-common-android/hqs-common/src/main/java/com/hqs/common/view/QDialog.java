@@ -169,6 +169,14 @@ public class QDialog {
         QDialog.dialogClickListener = null;
     }
 
+    public void release(){
+        this.tvMessage = null;
+        this.tvDivider1 = null;
+        this.activity = null;
+        this.tvDivider0 = null;
+    }
+
+
 
     public static class DialogActivity extends Activity {
 

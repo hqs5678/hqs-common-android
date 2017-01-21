@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,16 +104,18 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClickRightButton() {
                                 makeToast("ok");
+                                dialogView.release();
                             }
 
                             @Override
                             public void onClickLeftButton() {
                                 makeToast("cancel");
+                                dialogView.release();
                             }
 
                             @Override
                             public void onCancel() {
-
+                                dialogView.release();
                             }
                         });
 
@@ -128,16 +134,18 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClickRightButton() {
                                 makeToast("ok");
+                                dialogView.release();
                             }
 
                             @Override
                             public void onClickLeftButton() {
                                 makeToast("cancel");
+                                dialogView.release();
                             }
 
                             @Override
                             public void onCancel() {
-
+                                dialogView.release();
                             }
                         });
 
@@ -161,16 +169,18 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClickRightButton() {
                                 makeToast("ok");
+                                dialogView.release();
                             }
 
                             @Override
                             public void onClickLeftButton() {
                                 makeToast("cancel");
+                                dialogView.release();
                             }
 
                             @Override
                             public void onCancel() {
-
+                                dialogView.release();
                             }
                         });
 
@@ -204,12 +214,12 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                dialogView.dismiss();
-                            }
-                        }, 1000);
+//                        handler.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                dialogView.dismiss();
+//                            }
+//                        }, 1000);
 
                         break;
 
