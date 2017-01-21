@@ -216,6 +216,12 @@ public class QDialog {
             layoutParams.leftMargin = margin;
             layoutParams.rightMargin = margin;
             contentView.setLayoutParams(layoutParams);
+            contentView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    
+                }
+            });
 
             Animation animation = AnimationUtils.loadAnimation(this, enterAnim);
             relativeLayout.setAnimation(animation);
