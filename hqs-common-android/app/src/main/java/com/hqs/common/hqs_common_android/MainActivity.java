@@ -1,6 +1,7 @@
 package com.hqs.common.hqs_common_android;
 
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Handler handler = new Handler();
+    private QDialog dialogView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         titles.add("dialog0");
         titles.add("dialog1 onclick listener");
         titles.add("dialog2 cancel ok");
+        titles.add("dialog3 auto cancel");
 
 
         ListView lv = (ListView) findViewById(R.id.lv);
@@ -88,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
 
-                        QDialog dialogView = new QDialog(MainActivity.this);
-                        dialogView.setSingleButtonMode();
-                        dialogView.rightButton.setText("OK");
-                        dialogView.rightButton.setTextColor(Color.BLUE);
-                        dialogView.setCancelable(true);
+                        dialogView = new QDialog(MainActivity.this);
+                        dialogView.setSingleButtonMode()
+                                .setRightButtonText("OK")
+                                .setRightButtonTextColor(Color.BLUE)
+                                .setCancelable(true);
+
                         dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
                             @Override
                             public void onClickRightButton() {
@@ -117,13 +123,11 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         dialogView = new QDialog(MainActivity.this);
 
-                        dialogView.rightButton.setText("OK");
-                        dialogView.leftButton.setText("Cancel");
-
-                        dialogView.leftButton.setTextColor(Color.RED);
-                        dialogView.rightButton.setTextColor(Color.BLUE);
-
-                        dialogView.setCancelable(true);
+                        dialogView.setRightButtonTextColor(Color.BLUE)
+                                .setRightButtonText("OK")
+                                .setLeftButtonTextColor(Color.RED)
+                                .setLeftButtonText("Cancel")
+                                .setCancelable(true);
                         dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
                             @Override
                             public void onClickRightButton() {
@@ -148,16 +152,16 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         dialogView = new QDialog(MainActivity.this);
 
-                        dialogView.rightButton.setText("OK");
-                        dialogView.leftButton.setText("Cancel");
+                        dialogView.setRightButtonTextColor(Color.BLUE)
+                                .setRightButtonText("OK")
+                                .setLeftButtonTextColor(Color.RED)
+                                .setLeftButtonText("Cancel")
+                                .setCancelable(true)
+                                .setDividerHeight(4)
+                                .setDividerColor(Color.YELLOW)
+                                .setBackgroundRes(R.mipmap.ic_launcher)
+                                .setCancelable(true);
 
-                        dialogView.leftButton.setTextColor(Color.RED);
-                        dialogView.rightButton.setTextColor(Color.BLUE);
-                        dialogView.tvMessage.setTextColor(Color.RED);
-                        dialogView.setDividerColor(Color.BLUE);
-                        dialogView.setDividerHeight(4);
-
-                        dialogView.setCancelable(true);
                         dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
                             @Override
                             public void onClickRightButton() {
@@ -174,6 +178,45 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         });
+
+                        break;
+
+                    case 3:
+                        dialogView = new QDialog(MainActivity.this);
+
+                        dialogView.setRightButtonTextColor(Color.BLUE)
+                                .setRightButtonText("OK")
+                                .setLeftButtonTextColor(Color.RED)
+                                .setLeftButtonText("Cancel")
+                                .setCancelable(true)
+                                .setDividerHeight(4)
+                                .setCancelable(true);
+
+                        dialogView.show("hello this is message!!!!", new QDialog.OnDialogClickListener() {
+                            @Override
+                            public void onClickRightButton() {
+                                makeToast("ok");
+                            }
+
+                            @Override
+                            public void onClickLeftButton() {
+                                makeToast("cancel");
+                            }
+
+                            @Override
+                            public void onCancel() {
+
+                            }
+                        });
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialogView.dismiss();
+                            }
+                        }, 2000);
+
+                        break;
 
 
 

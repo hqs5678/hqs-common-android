@@ -31,14 +31,15 @@ public class QDialog {
     private static int enterAnim = R.anim.dialog_in;
     private static int exitAnim = R.anim.dialog_out;
 
-    public static Button leftButton;
-    public static Button rightButton;
-    public TextView tvMessage;
+    private static Button leftButton;
+    private static Button rightButton;
+    private TextView tvMessage;
     private TextView tvDivider0;
     private TextView tvDivider1;
     private static int margin = 40;
 
     private static boolean cancelable;
+    private static int backgroundRes = -1;
     private static WeakReference<Activity> dialogActivity;
 
     public QDialog(Activity activity) {
@@ -60,17 +61,16 @@ public class QDialog {
 
         ViewUtil.setRoundCornerToView(leftButton, 0, Color.GRAY, Color.WHITE);
         ViewUtil.setRoundCornerToView(rightButton, 0, Color.GRAY, Color.WHITE);
-
-
     }
 
-    public void setSingleButtonMode() {
+    public QDialog setSingleButtonMode() {
         leftButton.setVisibility(View.GONE);
         tvDivider1.setVisibility(View.GONE);
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) rightButton.getLayoutParams();
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
         rightButton.setLayoutParams(layoutParams);
+        return this;
     }
 
     public void show(String message, OnDialogClickListener onDialogClickListener) {
@@ -99,7 +99,7 @@ public class QDialog {
         return dialogClickListener;
     }
 
-    public void setDividerHeight(int h) {
+    public QDialog setDividerHeight(int h) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) tvDivider0.getLayoutParams();
         params.height = h;
         tvDivider0.setLayoutParams(params);
@@ -107,16 +107,45 @@ public class QDialog {
         params = (RelativeLayout.LayoutParams) tvDivider1.getLayoutParams();
         params.width = h;
         tvDivider1.setLayoutParams(params);
+        return this;
     }
 
-    public void setAnimation(int enterAnim, int exitAnim){
+
+    public QDialog setLeftButtonText(String text){
+        leftButton.setText(text);
+        return this;
+    }
+
+    public QDialog setLeftButtonTextColor(int color){
+        leftButton.setTextColor(color);
+        return this;
+    }
+
+    public QDialog setRightButtonText(String text){
+        rightButton.setText(text);
+        return this;
+    }
+
+    public QDialog setRightButtonTextColor(int color){
+        rightButton.setTextColor(color);
+        return this;
+    }
+
+    public QDialog setAnimation(int enterAnim, int exitAnim){
         QDialog.enterAnim = enterAnim;
         QDialog.exitAnim = exitAnim;
+        return this;
     }
 
-    public void setDividerColor(int color) {
+    public QDialog setDividerColor(int color) {
         tvDivider0.setBackgroundColor(color);
         tvDivider1.setBackgroundColor(color);
+        return this;
+    }
+
+    public QDialog setBackgroundRes(int res) {
+        QDialog.backgroundRes = res;
+        return this;
     }
 
     public interface OnDialogClickListener {
@@ -125,8 +154,16 @@ public class QDialog {
         void onCancel();
     }
 
-    public void setCancelable(boolean cancelable) {
+    public QDialog setCancelable(boolean cancelable) {
         this.cancelable = cancelable;
+        return this;
+    }
+
+
+
+    public class Builder {
+
+
     }
 
     public static class DialogActivity extends Activity {
@@ -140,7 +177,13 @@ public class QDialog {
 
             relativeLayout = new RelativeLayout(this);
             this.setContentView(relativeLayout);
-            relativeLayout.setBackgroundResource(R.color.dialogBackgroundColor);
+            if (backgroundRes == -1){
+                relativeLayout.setBackgroundResource(R.color.dialogBackgroundColor);
+            }
+            else {
+                relativeLayout.setBackgroundResource(backgroundRes);
+            }
+
 
             relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
