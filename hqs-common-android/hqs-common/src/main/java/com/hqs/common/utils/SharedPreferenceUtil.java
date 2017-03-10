@@ -17,7 +17,7 @@ public class SharedPreferenceUtil {
     private static SharedPreferences sharedPreferences;
 
     public static void initSharedPreference(Context context){
-        sharedPreferences = context.getSharedPreferences("sp_fstm", MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences("sp_hqs", MODE_PRIVATE);
     }
 
 
@@ -95,6 +95,12 @@ public class SharedPreferenceUtil {
     public static void removeKey(String key){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove(key);
+        editor.commit();
+    }
+
+    public static void removeAll(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
         editor.commit();
     }
 
