@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = '1.0.18'
-def vc = 19
+version = '1.0.26'
+def vc = 27
 
 android {
     compileSdkVersion 25
@@ -27,7 +27,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:design:25.3.0'
 }
 
 
