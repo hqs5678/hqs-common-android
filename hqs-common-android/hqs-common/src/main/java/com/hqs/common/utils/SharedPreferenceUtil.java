@@ -15,9 +15,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class SharedPreferenceUtil {
 
     private static SharedPreferences sharedPreferences;
+    public static Context context;
 
     public static void initSharedPreference(Context context){
         sharedPreferences = context.getSharedPreferences("sp_hqs", MODE_PRIVATE);
+        SharedPreferenceUtil.context = context;
     }
 
 

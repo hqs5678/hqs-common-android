@@ -24,6 +24,7 @@ public class ViewUtil {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                int n = 0;
                 while (true){
                     int[] location = new int[2];
                     view.getLocationOnScreen(location);
@@ -39,12 +40,24 @@ public class ViewUtil {
 
                     if (rectF.width() == 0 && rectF.height() == 0 && x == y && x == 0) {
                         try {
-                            Thread.sleep(200);
+                            Thread.sleep(100);
+                            n += 1;
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                     else{
+                        if (AppUtils.getBuildLevel() > 23 && SharedPreferenceUtil.context != null){
+                            int statusHeight = ScreenUtils.getStatusHeight(SharedPreferenceUtil.context);
+                            rectF.top += statusHeight;
+                            rectF.bottom -= statusHeight;
+                        }
+                        onViewRectCallBack.onRect(rectF);
+                        return;
+                    }
+
+                    if (n == 300){
+                        // 30 秒
                         onViewRectCallBack.onRect(rectF);
                         return;
                     }
