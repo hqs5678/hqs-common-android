@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<String> titles = new ArrayList<String>();
 
         titles.add("0 view utils get view position");
-
+        titles.add("1 app call back");
 
         ListView lv = (ListView) findViewById(R.id.lv);
         lv.setAdapter(new BaseAdapter() {
@@ -89,11 +89,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-
-                        Intent intent = new Intent(MainActivity.this, TestViewUtilActivity.class);
-                        startActivity(intent);
-
+                        startActivity(TestViewUtilActivity.class);
                         break;
+
+                    case 1:
+                        startActivity(Main1Activity.class);
+                        break;
+
+
 
 
                     default:
@@ -104,5 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void makeToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void startActivity(Class cls){
+        Intent intent = new Intent(MainActivity.this, cls);
+        startActivity(intent);
     }
 }
