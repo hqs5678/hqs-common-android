@@ -4,7 +4,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -47,17 +46,12 @@ public class ViewUtil {
                         }
                     }
                     else{
-                        if (AppUtils.getBuildLevel() > 23 && SharedPreferenceUtil.context != null){
-                            int statusHeight = ScreenUtils.getStatusHeight(SharedPreferenceUtil.context);
-                            rectF.top += statusHeight;
-                            rectF.bottom -= statusHeight;
-                        }
                         onViewRectCallBack.onRect(rectF);
                         return;
                     }
 
-                    if (n == 300){
-                        // 30 秒
+                    if (n == 50){
+                        // 5 秒
                         onViewRectCallBack.onRect(rectF);
                         return;
                     }
