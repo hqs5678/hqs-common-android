@@ -23,7 +23,7 @@ public class Main3Activity extends AppCompatActivity {
 
     public void buttonClick(View view){
 
-        Map<String, Object> map = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
         map.put("title", "jfdskjfkjkfdjsakjfkdsajfkdsaj");
         AppCallbackProcessor.call(map);
         finish();

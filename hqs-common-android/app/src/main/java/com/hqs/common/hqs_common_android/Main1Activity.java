@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.hqs.common.app.AppCallbackProcessor;
 import com.hqs.common.utils.Log;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Main1Activity extends AppCompatActivity {
@@ -28,10 +29,15 @@ public class Main1Activity extends AppCompatActivity {
 
     public void buttonClick(View view){
 
-        AppCallbackProcessor.setCallback(new AppCallbackProcessor.AppCallback() {
+        AppCallbackProcessor.addCallback(new AppCallbackProcessor.AppCallback() {
             @Override
             public void call(Map<String, Object> params) {
                 tv.setText(params.get("title").toString());
+            }
+
+            @Override
+            public void call(Map<String, Object> params, String callbackId) {
+                
             }
         });
         Intent intent = new Intent(this, Main2Activity.class);

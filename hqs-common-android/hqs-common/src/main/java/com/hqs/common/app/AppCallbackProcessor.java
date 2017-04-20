@@ -1,6 +1,8 @@
 package com.hqs.common.app;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by apple on 2016/11/17.
@@ -10,40 +12,30 @@ import java.util.HashMap;
 
 public class AppCallbackProcessor {
 
-    private static HashMap<String, AppCallback> callbacks = null;
+    private static Map<String, WeakReference<AppCallback>> callbacks = null;
+    public static String defaultCallbackId = "qs_appDefaultCallback";
 
-    public static void setCallback(AppCallback callback) {
-        setCallback(callback, "appDefaultCallback");
+    public static void addCallback(AppCallback callback) {
+        addCallback(callback, defaultCallbackId);
     }
 
-    public static void setCallback(AppCallback callback, String callbackId) {
-        HashMap<String, AppCallback> callbacks = new HashMap<>();
-        callbacks.put(callbackId, callback);
-        setCallbacks(callbacks);
-    }
-    
-    public static void setCallbacks(HashMap<String, AppCallback> callbacks){
+    public static void addCallback(AppCallback callback, String callbackId) {
+
         if (callbacks == null) {
-            return;
+            callbacks = new HashMap<>();
         }
 
-        if (AppCallbackProcessor.callbacks == null){
-            AppCallbackProcessor.callbacks = callbacks;
-        }
-        else{
-            AppCallbackProcessor.callbacks.putAll(callbacks);
-        }
-
+        callbacks.put(callbackId, new WeakReference<>(callback));
     }
 
-    public static void call(HashMap<String, Object> params){
-        call(params, "appDefaultCallback");
+    public static void call(Map<String, Object> params){
+        call(params, defaultCallbackId);
     }
 
-    public static void call(HashMap<String, Object> params, String callbackId) {
+    public static void call(Map<String, Object> params, String callbackId) {
         if (callbacks != null){
             if (callbacks.containsKey(callbackId)){
-                AppCallback callback = callbacks.get(callbackId);
+                AppCallback callback = callbacks.get(callbackId).get();
                 if (callback != null) {
                     callback.call(params);
                     callbacks.remove(callbackId);
@@ -65,9 +57,9 @@ public class AppCallbackProcessor {
         }
     }
 
-
     public interface AppCallback {
-        void call(HashMap<String, Object> params);
+        void call(Map<String, Object> params);
+        void call(Map<String, Object> params, String callbackId);
     }
 }
 
