@@ -19,26 +19,25 @@ public class AppCallbackProcessor {
         addCallback(callback, defaultCallbackId);
     }
 
-    public static void addCallback(AppCallback callback, String callbackId) {
+    public static void addCallback(AppCallback callback, String id) {
 
         if (callbacks == null) {
             callbacks = new HashMap<>();
         }
 
-        callbacks.put(callbackId, new WeakReference<>(callback));
+        callbacks.put(id, new WeakReference<>(callback));
     }
 
     public static void call(Map<String, Object> params){
         call(params, defaultCallbackId);
     }
 
-    public static void call(Map<String, Object> params, String callbackId) {
+    public static void call(Map<String, Object> params, String id) {
         if (callbacks != null){
-            if (callbacks.containsKey(callbackId)){
-                AppCallback callback = callbacks.get(callbackId).get();
+            if (callbacks.containsKey(id)){
+                AppCallback callback = callbacks.get(id).get();
                 if (callback != null) {
                     callback.call(params);
-                    callbacks.remove(callbackId);
                 }
             }
         }
@@ -49,17 +48,16 @@ public class AppCallbackProcessor {
         callbacks = null;
     }
 
-    public static void removeCallback(String callbackId){
+    public static void removeCallback(String id){
         if (callbacks != null){
-            if (callbacks.containsKey(callbackId)){
-                callbacks.remove(callbackId);
+            if (callbacks.containsKey(id)){
+                callbacks.remove(id);
             }
         }
     }
 
     public interface AppCallback {
         void call(Map<String, Object> params);
-        void call(Map<String, Object> params, String callbackId);
     }
 }
 

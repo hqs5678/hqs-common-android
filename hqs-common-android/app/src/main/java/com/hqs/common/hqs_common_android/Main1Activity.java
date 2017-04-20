@@ -34,11 +34,6 @@ public class Main1Activity extends AppCompatActivity {
             public void call(Map<String, Object> params) {
                 tv.setText(params.get("title").toString());
             }
-
-            @Override
-            public void call(Map<String, Object> params, String callbackId) {
-                
-            }
         });
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
