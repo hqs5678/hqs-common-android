@@ -5,7 +5,7 @@ import android.app.Application;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
- * Created by super on 2017/1/21.
+ * Created by super on 2017/3/27.
  */
 
 public class App extends Application {
@@ -20,8 +20,10 @@ public class App extends Application {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return;
-        } else {
+        }
+        else{
             LeakCanary.install(this);
         }
+
     }
 }

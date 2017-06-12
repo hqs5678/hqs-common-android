@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.telephony.TelephonyManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,58 @@ public class AppUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取设备的唯一标识，deviceId
+     *
+     * @param context
+     * @return
+     */
+    public static String getDeviceId(Context context) {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceId = tm.getDeviceId();
+        if (deviceId == null) {
+            return "--";
+        } else {
+            return deviceId;
+        }
+    }
+
+    /**
+     * 获取手机品牌
+     *
+     * @return
+     */
+    public static String getPhoneBrand() {
+        return android.os.Build.BRAND;
+    }
+
+    /**
+     * 获取手机型号
+     *
+     * @return
+     */
+    public static String getPhoneModel() {
+        return android.os.Build.MODEL;
+    }
+
+    /**
+     * 获取手机Android API等级（22、23 ...）
+     *
+     * @return
+     */
+    public static int getBuildLevel() {
+        return android.os.Build.VERSION.SDK_INT;
+    }
+
+    /**
+     * 获取手机Android 版本（4.4、5.0、5.1 ...）
+     *
+     * @return
+     */
+    public static String getBuildVersion() {
+        return android.os.Build.VERSION.RELEASE;
     }
 
     public static boolean isAppInstalledWithUri(Context context, String uri) {

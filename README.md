@@ -10,7 +10,7 @@ hqs-common for android
 ```ruby
 
 dependencies {
-    compile 'com.hqs.common:hqs-common:1.0.1'
+    compile 'com.hqs.common:hqs-common:1.0.12'
 }
 
 ```

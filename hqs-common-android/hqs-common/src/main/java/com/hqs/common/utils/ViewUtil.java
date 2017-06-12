@@ -9,7 +9,6 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -17,6 +16,51 @@ import android.view.View;
  */
 
 public class ViewUtil {
+
+
+    public static void getViewRect(final View view, final OnViewRectCallBack onViewRectCallBack){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int n = 0;
+                while (true){
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    int x = location[0];
+                    int y = location[1];
+                    int h = view.getHeight();
+                    int w = view.getWidth();
+                    RectF rectF = new RectF();
+                    rectF.left = x;
+                    rectF.top = y;
+                    rectF.right = x + w;
+                    rectF.bottom = y + h;
+
+                    if (rectF.width() == 0 && rectF.height() == 0 && x == y && x == 0) {
+                        try {
+                            Thread.sleep(100);
+                            n += 1;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else{
+                        onViewRectCallBack.onRect(rectF);
+                        return;
+                    }
+
+                    if (n == 50){
+                        // 5 秒
+                        onViewRectCallBack.onRect(rectF);
+                        return;
+                    }
+                }
+            }
+        }).start();
+
+
+    }
 
     public static void setRoundCornerToView(final View view, final float cornerRadius, boolean ripple, int backgroundColor) {
         setRippleDrawableRoundCorner(view, cornerRadius, ripple, lighterColor(backgroundColor), backgroundColor);
@@ -57,7 +101,6 @@ public class ViewUtil {
                 view.setBackgroundColor(backgroundColor);
             }
         }
-
     }
 
 
@@ -74,11 +117,7 @@ public class ViewUtil {
         return newColor;
     }
 
-    public static void log(String obj) {
-        Log.e("====", obj);
-    }
-
-    public static void log(double obj) {
-        Log.e("====", obj + "");
+    public interface OnViewRectCallBack{
+        void onRect(RectF rectF);
     }
 }

@@ -142,6 +142,13 @@ public class TimerButton extends RelativeLayout {
         titleView.setText(title);
     }
 
+    public void stop(){
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (curTime < 0){

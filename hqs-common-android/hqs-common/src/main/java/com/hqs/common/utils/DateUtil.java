@@ -23,7 +23,7 @@ public class DateUtil {
 
     public static long calculateTimeInterval(java.util.Date time1, java.util.Date time2){
         long d = time1.getTime() - time2.getTime();
-        return d > 0 ? d : d * -1;
+        return d;
     }
 
     public static Date currentDate(){
