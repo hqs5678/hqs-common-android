@@ -1,5 +1,6 @@
 package com.hqs.common.view.tabbar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -262,7 +263,6 @@ public class TabBarView extends RelativeLayout{
         private TextView titleView;
         private BadgeView badgeView;
         private int bgColor = Color.BLUE;
-        private int rippleColor = Color.YELLOW;
         private RelativeLayout bgview;  // 为了添加ripple 效果
         private Button button;  // 背景里面的button
 
@@ -375,6 +375,7 @@ public class TabBarView extends RelativeLayout{
     }
 
     // 显示badge value 的View  背景颜色 红色    圆角
+    @SuppressLint("AppCompatCustomView")
     public class BadgeView extends TextView{
 
         private int bgColor;
