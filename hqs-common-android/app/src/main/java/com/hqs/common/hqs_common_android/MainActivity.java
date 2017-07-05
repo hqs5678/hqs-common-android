@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hqs.common.utils.DensityUtils;
+import com.hqs.common.utils.Log;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.print(1, 22.8887f, 34l);
+        Log.print("111", "222222222", this, 88899);
+
+        Log.print(22);
 
         final ArrayList<String> titles = new ArrayList<String>();
 

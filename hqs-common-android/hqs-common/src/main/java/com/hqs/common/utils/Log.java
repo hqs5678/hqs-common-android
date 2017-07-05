@@ -37,48 +37,56 @@ public class Log {
 
     // log
     public static void print(String logString) {
+        print(new String[]{logString});
+    }
+
+    public static void print(String ... logString) {
         if (logString == null) {
-            logString = "null";
+            logString = new String[]{"null"};
         }
-        if (debug) {
-            android.util.Log.e(tag, logString);
+        for (String str: logString){
+            if (debug) {
+                android.util.Log.e(tag, str);
+            }
+            save(str);
         }
-
-        save(logString);
     }
 
-    public static void print(int log) {
-        if (debug){
-            android.util.Log.e(tag, log + "");
-        }
-        save(log + "");
+    public static void print(Number log) {
+        print(new Number[]{log});
     }
 
-    public static void print(float log) {
-        if (debug){
-            android.util.Log.e(tag, log + "");
+    public static void print(Number ... log) {
+        for (Number i: log){
+            if (debug){
+                android.util.Log.e(tag, i + "");
+            }
+            save(i + "");
         }
-        save(log + "");
-    }
-
-    public static void print(double log) {
-        if (debug){
-            android.util.Log.e(tag, log + "");
-        }
-        save(log + "");
     }
 
     public static void print(Object log) {
-        String l;
-        if (log == null) {
-            l = "null";
-        } else {
-            l = log.toString();
+        print(new Object[]{log});
+    }
+
+    public static void print(Object ... log) {
+        if (log == null){
+            print(new String[]{"null"});
         }
-        if (debug){
-            android.util.Log.e(tag, l);
+        else{
+            for (Object obj: log){
+                String l;
+                if (obj == null) {
+                    l = "null";
+                } else {
+                    l = obj.toString();
+                }
+                if (debug){
+                    android.util.Log.e(tag, l);
+                }
+                save(l);
+            }
         }
-        save(l);
     }
 
     private static void save(final String logString) {
