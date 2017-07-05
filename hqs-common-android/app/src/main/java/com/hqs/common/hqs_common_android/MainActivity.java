@@ -1,8 +1,10 @@
 package com.hqs.common.hqs_common_android;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hqs.common.utils.ActivityUtil;
 import com.hqs.common.utils.DensityUtils;
 import com.hqs.common.utils.Log;
 
@@ -26,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityUtil.setActivityFullScreen(this);
+        ActivityUtil.hideActionBar(this);
         setContentView(R.layout.activity_main);
+
+
 
         Log.print(1, 22.8887f, 34l);
         Log.print("111", "222222222", this, 88899);
