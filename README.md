@@ -74,6 +74,7 @@ public class Main1Activity extends AppCompatActivity {
         // });
         // callback可能会被销毁, 造成在回调时(AppCallbackProcessor.call(params))没有任何反应, 
         // 原因是callback已被销毁, 
+        // 解决: 将callback设为为activity的一个字段.
         
         Intent intent = new Intent(this, Main2Activity.class);
         startActivity(intent);
@@ -96,6 +97,47 @@ public void buttonClick(View view){
 
 
 ```
+
+#### 2. ActivityUtil.java
+> 设置全屏显示activity, 隐藏actionBar
+##### 类方法
+- ActivityUtil.setActivityFullScreen(activity)
+- ActivityUtil.hideActionBar(activity)
+
+#### 3. AppUtil.java
+> 获取手机型号等
+##### 类方法
+- AppUtil.getAppName(context) // 获取应用程序的名称
+- AppUtil.getVersionName(context) // 获取应用程序版本名称信息
+- AppUtil.getDeviceId(context) // 获取设备的唯一标识，deviceId
+- AppUtil.getPhoneBrand() // 获取手机品牌
+- AppUtil.getPhoneModel() // 获取手机型号
+- AppUtil.getBuildLevel() // 获取手机系统API
+- AppUtil.getBuildVersion() // 获取手机版本
+- AppUtil.isAppInstalled(context, packageName) // 判断是否安装
+
+#### 其他类
+- ColorUtil
+- DateUtil
+- DensityUtil
+- Log
+- MD5Util
+- NetUtil
+- ScreenUtil
+- SDCardUtil
+- SharedPreferenceUtil
+- StatusBarUtil
+- ValidteUtil
+- ViewUtil
+- 自定义TabBarView,简单实现Tab页的主界面
+- 自定NavigationBar
+- TimerButton(倒计时功能的按钮)
+
+#### 使用方法
+
+> 本人实在太懒, 请感兴趣的同学点进去直接查看源码, 使用方法简单方便
+
+
 
 
 
