@@ -37,14 +37,18 @@ public class ScreenUtils
 	public static float screenW(Context context){
 		if(sw == 0){
 			sw = context.getResources().getDisplayMetrics().widthPixels;
+			sh = context.getResources().getDisplayMetrics().heightPixels;
 		}
+		sw = sh > sw ? sw : sh;
 		return sw;
 	}
 
 	public static float screenH(Context context){
 		if(sh == 0){
+			sw = context.getResources().getDisplayMetrics().widthPixels;
 			sh = context.getResources().getDisplayMetrics().heightPixels;
 		}
+		sh = sh > sw ? sh : sw;
 		return sh;
 	}
 
