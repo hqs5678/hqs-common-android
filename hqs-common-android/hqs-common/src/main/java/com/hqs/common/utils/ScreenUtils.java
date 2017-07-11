@@ -9,20 +9,13 @@ import android.view.View;
 
 /**
  * 获得屏幕相关的辅助类
- * 
- * @author zhy
+ *
  * 
  */
-public class ScreenUtils
-{
-
-
-	private static float sh = 0;
-	private static float sw = 0;
+public class ScreenUtils {
 	private static float de = 0;
 
-	private ScreenUtils()
-	{
+	private ScreenUtils() {
 		/* cannot be instantiated */
 		throw new UnsupportedOperationException("cannot be instantiated");
 	}
@@ -35,19 +28,15 @@ public class ScreenUtils
 	}
 
 	public static float screenW(Context context){
-		if(sw == 0){
-			sw = context.getResources().getDisplayMetrics().widthPixels;
-			sh = context.getResources().getDisplayMetrics().heightPixels;
-		}
+		float sh = context.getResources().getDisplayMetrics().heightPixels;
+		float sw = context.getResources().getDisplayMetrics().widthPixels;
 		sw = sh > sw ? sw : sh;
 		return sw;
 	}
 
 	public static float screenH(Context context){
-		if(sh == 0){
-			sw = context.getResources().getDisplayMetrics().widthPixels;
-			sh = context.getResources().getDisplayMetrics().heightPixels;
-		}
+		float sh = context.getResources().getDisplayMetrics().heightPixels;
+		float sw = context.getResources().getDisplayMetrics().widthPixels;
 		sh = sh > sw ? sh : sw;
 		return sh;
 	}
