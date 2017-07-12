@@ -1,5 +1,6 @@
 package com.hqs.common.utils;
 
+import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.os.Build;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by apple on 16/9/5.
@@ -101,6 +103,33 @@ public class ViewUtil {
                 view.setBackgroundColor(backgroundColor);
             }
         }
+    }
+
+    /**
+     * 获取activity 的contentView
+     * @param activity
+     * @return
+     */
+    public static ViewGroup getContentView(Activity activity) {
+        ViewGroup viewGroup = (ViewGroup) activity.findViewById(android.R.id.content);
+        return viewGroup;
+    }
+
+    /**
+     * 获取activity root view (最外层的view)
+     * @param activity
+     * @return
+     */
+    public static ViewGroup getRootView(Activity activity) {
+        ViewGroup viewGroup = (ViewGroup) activity.findViewById(android.R.id.content);
+        while (true) {
+            viewGroup = (ViewGroup) viewGroup.getParent();
+            if ((viewGroup.getWidth() == ScreenUtils.screenW(activity) && viewGroup.getHeight() == ScreenUtils.screenH(activity))
+                    || (viewGroup.getWidth() == ScreenUtils.screenH(activity) && viewGroup.getHeight() == ScreenUtils.screenW(activity))) {
+                break;
+            }
+        }
+        return viewGroup;
     }
 
 
