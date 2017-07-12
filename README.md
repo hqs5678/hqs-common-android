@@ -8,7 +8,7 @@
 ```
 
 dependencies {
-    compile 'com.hqs.common:hqs-common:1.1.15'
+    compile 'com.hqs.common:hqs-common:1.1.16'
 }
 
 ```
