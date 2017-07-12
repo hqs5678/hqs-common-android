@@ -8,11 +8,11 @@
     tools:context="com.hqs.common.hqs_common_android.Main1Activity">
 
 
-    <TextView
+    <com.hqs.common.view.SelectableTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="123"/>
+        android:text="121231231231231231231231231231231231231231231231231231231231231233121231231231231231231231231231231231231231231231231231231231231233121231231231231231231231231231231231231231231231231231231231231233"/>
 
     <Button
         android:onClick="buttonClick"
