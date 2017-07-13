@@ -12,6 +12,7 @@ import android.graphics.drawable.shapes.Shape;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 
 /**
  * Created by apple on 16/9/5.
@@ -123,11 +124,13 @@ public class ViewUtil {
     public static ViewGroup getRootView(Activity activity) {
         ViewGroup viewGroup = (ViewGroup) activity.findViewById(android.R.id.content);
         while (true) {
-            ViewGroup vg = (ViewGroup) viewGroup.getParent();
-            if (vg == null){
+            ViewParent parent = viewGroup.getParent();
+            if (parent instanceof ViewGroup){
+                viewGroup  = (ViewGroup) parent;
+            }
+            else{
                 break;
             }
-            viewGroup = vg;
         }
         return viewGroup;
     }
