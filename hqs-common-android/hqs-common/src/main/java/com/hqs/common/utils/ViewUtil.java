@@ -123,11 +123,11 @@ public class ViewUtil {
     public static ViewGroup getRootView(Activity activity) {
         ViewGroup viewGroup = (ViewGroup) activity.findViewById(android.R.id.content);
         while (true) {
-            viewGroup = (ViewGroup) viewGroup.getParent();
-            if ((viewGroup.getWidth() == ScreenUtils.screenW(activity) && viewGroup.getHeight() == ScreenUtils.screenH(activity))
-                    || (viewGroup.getWidth() == ScreenUtils.screenH(activity) && viewGroup.getHeight() == ScreenUtils.screenW(activity))) {
+            ViewGroup vg = (ViewGroup) viewGroup.getParent();
+            if (vg == null){
                 break;
             }
+            viewGroup = vg;
         }
         return viewGroup;
     }
