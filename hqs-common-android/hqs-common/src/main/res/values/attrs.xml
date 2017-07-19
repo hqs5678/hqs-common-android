@@ -11,6 +11,8 @@
         <attr name="titleNormal" format="string"/>
         <attr name="titleColor" format="color"/>
         <attr name="totalTime" format="integer"/>
+        <attr name="backgroundColorNormal" format="color"/>
+        <attr name="backgroundColorDisable" format="color"/>
     </declare-styleable>
 
 </resources>

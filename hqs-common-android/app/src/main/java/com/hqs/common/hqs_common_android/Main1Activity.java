@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.hqs.common.app.AppCallbackProcessor;
 import com.hqs.common.utils.Log;
+import com.hqs.common.view.TimerButton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class Main1Activity extends AppCompatActivity {
 
 
     private TextView tv;
+    private TimerButton timerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,24 @@ public class Main1Activity extends AppCompatActivity {
         getSupportActionBar().setTitle("main1");
 
         tv = (TextView) findViewById(R.id.text);
+        timerButton = (TimerButton) findViewById(R.id.timerButton);
+
+        timerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timerButton.startTimer();
+
+                timerButton.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        timerButton.stop();
+                    }
+                }, 4000);
+            }
+        });
+
+
+
     }
 
     public void buttonClick(View view){

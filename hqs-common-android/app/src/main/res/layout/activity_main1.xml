@@ -20,5 +20,15 @@
         android:text="next"
         android:layout_height="wrap_content" />
 
+    <com.hqs.common.view.TimerButton
+        android:id="@+id/timerButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        app:backgroundColorNormal="#efc37c"
+        app:backgroundColorDisable="#fae4a6"
+        app:titleColor="#100505"
+        app:totalTime="10"
+        app:titleNormal="获取验证码"/>
+
 
 </LinearLayout>

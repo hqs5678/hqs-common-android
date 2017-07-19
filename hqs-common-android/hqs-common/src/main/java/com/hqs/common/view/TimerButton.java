@@ -3,9 +3,7 @@ package com.hqs.common.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -22,17 +20,14 @@ import java.util.TimerTask;
 
 public class TimerButton extends RelativeLayout {
 
-    private int backgroundColorNormalRes = -1;
-    private int backgroundColorDisableRes = -1;
+    private int backgroundColorNormal = -1;
+    private int backgroundColorDisable = -1;
     private String titleNormal;
     public int totalTime = -1;
     private int curTime = -1;
 
     private Context context;
     private TextView titleView;
-
-    public Handler handler = null;
-
     private Timer timer;
 
     public TimerButton(Context context, AttributeSet attrs) {
@@ -45,11 +40,14 @@ public class TimerButton extends RelativeLayout {
         int titleColor = a.getColor(R.styleable.TimerButton_titleColor, Color.BLUE);
         totalTime = a.getInteger(R.styleable.TimerButton_totalTime, 60);
         titleNormal = a.getString(R.styleable.TimerButton_titleNormal);
+        backgroundColorNormal = a.getColor(R.styleable.TimerButton_backgroundColorNormal, Color.YELLOW);
+        backgroundColorDisable = a.getColor(R.styleable.TimerButton_backgroundColorDisable, Color.GRAY);
+
         a.recycle();
 
         titleView.setTextColor(titleColor);
         titleView.setText(titleNormal);
-
+        this.setBackgroundColor(backgroundColorNormal);
     }
 
     public TimerButton(Context context) {
@@ -65,17 +63,12 @@ public class TimerButton extends RelativeLayout {
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.addRule(CENTER_IN_PARENT, TRUE);
         titleView.setLayoutParams(params);
-
-        this.setBackgroundColor(Color.GREEN);
     }
 
     public void startTimer(){
 
-        if (handler == null){
-            Log.e("timerButton", "handler is null, please set handler before call the function (startTimer())");
-            return;
-        }
         if (timer == null){
+            setBackgroundColor(backgroundColorDisable);
             timer = new Timer();
 
             TimerTask task = new TimerTask() {
@@ -84,24 +77,18 @@ public class TimerButton extends RelativeLayout {
                     if (curTime < 0){
                         curTime = totalTime;
                     }
-                    String text = curTime + "s";
-
                     if (curTime == 0){
-                        timer.cancel();
-                        timer = null;
-                        curTime = -1;
-
-                        text = titleNormal;
+                        reset();
                     }
-
-                    final String t = text;
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            setTitle(t.toLowerCase());
-                        }
-                    });
-
+                    else{
+                        final String text = curTime + "s";
+                        titleView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                setTitle(text.toLowerCase());
+                            }
+                        });
+                    }
                     curTime --;
                 }
             };
@@ -109,25 +96,12 @@ public class TimerButton extends RelativeLayout {
         }
     }
 
-    public void startTimer(int totalTime){
-        this.totalTime = totalTime;
-        this.startTimer();
+    public void setBackgroundColorNormal(int backgroundColorNormal) {
+        this.backgroundColorNormal = backgroundColorNormal;
     }
 
-    public int getBackgroundColorNormalRes() {
-        return backgroundColorNormalRes;
-    }
-
-    public void setBackgroundColorNormalRes(int backgroundColorNormalRes) {
-        this.backgroundColorNormalRes = backgroundColorNormalRes;
-    }
-
-    public int getBackgroundColorDisableRes() {
-        return backgroundColorDisableRes;
-    }
-
-    public void setBackgroundColorDisableRes(int backgroundColorDisableRes) {
-        this.backgroundColorDisableRes = backgroundColorDisableRes;
+    public void setBackgroundColorDisable(int backgroundColorDisable) {
+        this.backgroundColorDisable = backgroundColorDisable;
     }
 
     public String getTitleNormal() {
@@ -144,9 +118,16 @@ public class TimerButton extends RelativeLayout {
 
     public void stop(){
         if (timer != null) {
-            timer.cancel();
-            timer = null;
+            reset();
         }
+    }
+
+    private void reset(){
+        timer.cancel();
+        timer = null;
+        curTime = -1;
+        setBackgroundColor(backgroundColorNormal);
+        setTitle(titleNormal);
     }
 
     @Override
