@@ -1,19 +1,16 @@
 package com.hqs.common.hqs_common_android;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hqs.common.utils.ColorUtil;
-import com.hqs.common.utils.Log;
+import com.hqs.common.utils.ScreenUtils;
 import com.hqs.common.view.QSViewPager;
-
-import org.w3c.dom.Text;
 
 public class TestViewPagerActivity extends AppCompatActivity {
 
@@ -29,29 +26,46 @@ public class TestViewPagerActivity extends AppCompatActivity {
 
         this.viewPager.setAdapter(new PagerAdapter() {
 
+            Object viewWillDestroy;
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
 
+                if (viewWillDestroy != null && viewWillDestroy instanceof RelativeLayout){
+                    container.addView((View) viewWillDestroy);
+
+                    TextView tv = (TextView) ((RelativeLayout) viewWillDestroy).findViewWithTag(viewWillDestroy);
+                    tv.setText(position + " - " + (position * ScreenUtils.screenW(getApplicationContext())));
+
+
+                    Object object = viewWillDestroy;
+                    viewWillDestroy = null;
+                    return object;
+                }
                 RelativeLayout relativeLayout = new RelativeLayout(container.getContext());
                 relativeLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                relativeLayout.setBackgroundColor(ColorUtil.randomColor());
+                relativeLayout.setBackgroundColor(Color.WHITE);
 
-//                TextView textView = new TextView(relativeLayout.getContext());
-//                relativeLayout.addView(textView);
-//
-//                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) textView.getLayoutParams();
-//                params.addRule(RelativeLayout.CENTER_IN_PARENT);
-//                textView.setLayoutParams(params);
+                TextView textView = new TextView(relativeLayout.getContext());
+                relativeLayout.addView(textView);
 
-                Log.print(relativeLayout);
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) textView.getLayoutParams();
+                params.addRule(RelativeLayout.CENTER_IN_PARENT);
+                textView.setLayoutParams(params);
+
+                textView.setTextSize(30 * ScreenUtils.density(relativeLayout.getContext()));
+                textView.setText(position + " - " + (position * ScreenUtils.screenW(getApplicationContext())));
+
+                textView.setTag(relativeLayout);
+
+//                Log.print(relativeLayout);
                 container.addView(relativeLayout);
                 return relativeLayout;
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return 10;
             }
 
             @Override
@@ -61,8 +75,16 @@ public class TestViewPagerActivity extends AppCompatActivity {
 
             @Override
             public void destroyItem(ViewGroup container, int position, Object object) {
-
+                viewWillDestroy = object;
+                container.removeView((View) object);
             }
         });
     }
+
+    public void buttonClick(View view){
+        viewPager.scrollBy(100, 0);
+
+
+    }
+
 }

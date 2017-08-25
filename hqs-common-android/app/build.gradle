@@ -24,7 +24,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':hqs-common')
 
-
+    compile 'com.github.wenmingvs:LogReport:1.0.3'
 
 
     compile 'com.android.support:appcompat-v7:25.1.0'
