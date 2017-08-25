@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         titles.add("0 view utils get view position");
         titles.add("1 app call back");
+        titles.add("2 ViewPager");
 
         ListView lv = (ListView) findViewById(R.id.lv);
         lv.setAdapter(new BaseAdapter() {
@@ -108,8 +109,9 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(Main1Activity.class);
                         break;
 
-
-
+                    case 2:
+                        startActivity(TestViewPagerActivity.class);
+                        break;
 
                     default:
                 }

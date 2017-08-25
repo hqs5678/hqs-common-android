@@ -19,7 +19,8 @@
         <activity android:name=".TestViewUtilActivity" />
         <activity android:name=".Main1Activity" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".Main3Activity"></activity>
+        <activity android:name=".Main3Activity" />
+        <activity android:name=".TestViewPagerActivity"></activity>
     </application>
 
 </manifest>
