@@ -29,7 +29,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    provided 'com.android.support:design:25.3.0'
+    provided 'com.android.support:design:+'
 }
 
 
