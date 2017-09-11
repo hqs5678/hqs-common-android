@@ -61,7 +61,7 @@ public class TabBarView extends RelativeLayout{
     }
 
     private void setup(){
-
+        padding = DensityUtils.dp2px(getContext(), 4);
     }
 
     public ArrayList<TabBarItem> getTabBarItems() {
@@ -73,7 +73,6 @@ public class TabBarView extends RelativeLayout{
             return;
         }
         this.tabBarItems = tabBarItems;
-        padding = DensityUtils.dp2px(getContext(), 4);
 
         this.removeAllViews();
         // 添加控件
