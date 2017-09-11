@@ -42,6 +42,8 @@ public class TabBarView extends RelativeLayout{
     private int rippleColor = Color.BLUE;
     private int selectedTitleColor = Color.LTGRAY;
     private int titleSize = 16;
+    // imageView 所占的高与父控件的比值
+    private float imgWHRate = 0.56f;
 
 
     public TabBarView(Context context) {
@@ -128,6 +130,10 @@ public class TabBarView extends RelativeLayout{
 
     public void setTitleColor(int titleColor) {
         this.titleColor = titleColor;
+    }
+
+    public void setImgWHRate(float imgWHRate) {
+        this.imgWHRate = imgWHRate;
     }
 
     // 设置 tab item appearance
@@ -272,9 +278,6 @@ public class TabBarView extends RelativeLayout{
         private boolean isSelected = false;
         // badge view 相对于图片中心的偏移量
         private float badgeViewOffsetRate = 0.3f;
-
-        // imageView 所占的高与父控件的比值
-        private float imgWHRate = 0.56f;
 
         public ItemView(Context context) {
             super(context);
