@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 public class QSViewPager extends ViewPager {
 
-    private boolean horizontalScrollable = false;
+    private boolean horizontalScrollable = true;
 
     public QSViewPager(Context context) {
         super(context);
