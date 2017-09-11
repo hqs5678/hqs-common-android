@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hqs.common.utils.DensityUtils;
 import com.hqs.common.utils.ViewUtil;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class TabBarView extends RelativeLayout{
     private int titleSize = 16;
     // imageView 所占的高与父控件的比值
     private float imgWHRate = 0.56f;
+    private float padding = 0;  // 4dp
 
 
     public TabBarView(Context context) {
@@ -71,6 +73,7 @@ public class TabBarView extends RelativeLayout{
             return;
         }
         this.tabBarItems = tabBarItems;
+        padding = DensityUtils.dp2px(getContext(), 4);
 
         this.removeAllViews();
         // 添加控件
@@ -134,6 +137,10 @@ public class TabBarView extends RelativeLayout{
 
     public void setImgWHRate(float imgWHRate) {
         this.imgWHRate = imgWHRate;
+    }
+
+    public void setPadding(float padding) {
+        this.padding = padding;
     }
 
     // 设置 tab item appearance
@@ -346,7 +353,7 @@ public class TabBarView extends RelativeLayout{
 
             // 设置子控件位子
             // imageView
-            int margin = (int) (params.height * 0.06);
+            int margin = (int) padding;
             int imgW = (int) (params.height * imgWHRate);
             LayoutParams pImg = new LayoutParams(imgW,imgW);
             pImg.addRule(CENTER_HORIZONTAL,TRUE);
@@ -455,27 +462,6 @@ public class TabBarView extends RelativeLayout{
                 }
             }
         }
-    }
-
-    // log
-    private void log(String logString) {
-        Log.e(tag, logString);
-    }
-
-    private void log(int log) {
-        Log.e(tag, log + "");
-    }
-
-    private void log(float log) {
-        Log.e(tag, log + "");
-    }
-
-    private void log(double log) {
-        Log.e(tag, log + "");
-    }
-
-    private void log(Object log) {
-        Log.e(tag, log.toString());
     }
 }
 
